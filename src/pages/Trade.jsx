@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchPairs } from "../redux/actions/currencies";
 import { addOrderItem } from "../redux/actions/order";
 
-function Trade() {
+function Trade() { 
   //const [pairs, setPairs] = useState([]);
   const [defaultPair, setDefaultPair] = useState({});
   const [qwe, setQwe] = useState(1);
@@ -40,6 +40,7 @@ function Trade() {
     setDefaultPair(obj);
     console.log('onClickChangePair / callBack');
   }, []);
+  
   // const onClickChangePair = (obj) => {
   //   setDefaultPair(obj);
   //   console.log('onClickChangePair / callBack');
