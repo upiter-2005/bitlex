@@ -1,0 +1,61 @@
+{
+    "usdt": [
+      {
+        "currency": "BTC",
+        "price": "41500",
+        "image": "http://devtesty.website/crypto/ETH/AKRO.png"
+      },
+      {
+        "currency": "LTC",
+        "price": "114",
+        "image": "http://devtesty.website/crypto/ETH/CHZ.png"
+      },
+      {
+        "currency": "TRX",
+        "price": "0.23",
+        "image": "http://devtesty.website/crypto/ETH/CRO.jpg"
+      },
+      {
+        "currency": "AVAX",
+        "price": "56",
+        "image": "http://devtesty.website/crypto/ETH/DAG.png"
+      },
+      {
+        "currency": "MATIC",
+        "price": "1.54",
+        "image": "http://devtesty.website/crypto/ETH/EGT.jpg"
+      },
+      {
+        "currency": "ETC",
+        "price": "33",
+        "image": "http://devtesty.website/crypto/ETH/NAS.png"
+      },
+      {
+        "currency": "BNB",
+        "price": "340",
+        "image": "http://devtesty.website/crypto/ETH/MXM.jpg"
+      },
+      {
+        "currency": "ATLAS",
+        "price": "0.045",
+        "image": "http://devtesty.website/crypto/ETH/SAN.jpg"
+      },
+      {
+        "currency": "KNC",
+        "price": "1.36",
+        "image": "http://devtesty.website/crypto/ETH/ZNT.png"
+      }
+      
+    ],
+    "default": {
+       "currency": "BTC",
+        "price": "41500",
+        "image": "http://devtesty.website/crypto/ETH/AKRO.png"
+      },
+    "account":{
+      "name" : "USDT",
+      "amount" : 1700
+    }
+      
+   
+  }
