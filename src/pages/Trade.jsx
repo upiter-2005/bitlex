@@ -1,12 +1,12 @@
 import React from "react";
-import { Buy, Current, History, Pairs, Sell } from "../components";
+import { Buy, Current, History, Pairs, Sell, LoadingPair } from "../components";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPairs } from "../redux/actions/currencies";
 import { addOrderItem } from "../redux/actions/order";
 
-function Trade() { 
+function Trade() {
   //const [pairs, setPairs] = useState([]);
   const [defaultPair, setDefaultPair] = useState({});
   const [qwe, setQwe] = useState(1);
@@ -14,17 +14,18 @@ function Trade() {
   //const [order, setOrder] = useState([]);
 
   const pairs = useSelector(({ currencies }) => currencies.items);
+  const load = useSelector(({ currencies }) => currencies.isLoaded);
   const order = useSelector(({ order }) => order.orders);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchPairs());
-     axios.get("http://localhost:3000/db.json").then(({ data }) => {
+    axios.get("http://localhost:3000/db.json").then(({ data }) => {
       // setPairs(data.usdt);
       setDefaultPair(data.default);
-      setAccount(data.account.amount);
-     });
+      setAccount(data.account[0].amount);
+    });
   }, []);
 
   const handlerClick = () => {
@@ -38,9 +39,9 @@ function Trade() {
 
   const onClickChangePair = React.useCallback((obj) => {
     setDefaultPair(obj);
-    console.log('onClickChangePair / callBack');
+    console.log("onClickChangePair / callBack");
   }, []);
-  
+
   // const onClickChangePair = (obj) => {
   //   setDefaultPair(obj);
   //   console.log('onClickChangePair / callBack');
@@ -50,7 +51,7 @@ function Trade() {
     <>
       <section className="bitlex-wrap">
         <button onClick={handlerClick}>ckick</button>
-   
+
         <div className="container-my">
           <div className="row">
             <div className="col-md-9">
@@ -110,12 +111,15 @@ function Trade() {
                 </a>
               </div>
 
-              <Pairs currensies={pairs} onChangePair={onClickChangePair} />
+              <Pairs
+                currensies={pairs}
+                onChangePair={onClickChangePair}
+                isLoaded={load}
+              />
             </div>
           </div>
         </div>
       </section>
-
       <History items={order} />
     </>
   );

@@ -1,17 +1,17 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Modal } from "../components";
+import { Modal } from "../../components";
+import AccountData from "./AccountData";
 import { useState } from "react";
 
 function Account() {
   const items = useSelector(({ order }) => order.orders);
   const [open, switchModal] = useState(false);
 
-
   return (
     <section className="bitlex-wrap">
       <h2>Account</h2>
-      <button onClick={()=>switchModal(true)}>Open Modal</button>
+      <button onClick={() => switchModal(true)}>Open Modal</button>
       <Modal isActive={open} setActive={switchModal}>
         <div>
           {items ? (
@@ -81,6 +81,7 @@ function Account() {
           </div> */}
         </div>
         <div>
+          <AccountData />
           {items ? (
             items.map((item, index) => (
               <div className="order-wrap" key={index}>

@@ -6,6 +6,7 @@ export { default as History} from './History';
 export { default as Pairs} from './Pairs';
 export { default as Sell} from './Sell';
 export { default as Modal} from './Modal';
+export { default as LoadingPair} from './LoadingPair';
 
 // import Header from "./Header";
 // import Categories from "./Categories";

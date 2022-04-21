@@ -52,10 +52,10 @@
         "price": "41500",
         "image": "http://devtesty.website/crypto/ETH/AKRO.png"
       },
-    "account":{
-      "name" : "USDT",
-      "amount" : 1700
-    }
-      
-   
+    "account": [
+      {
+        "name" : "USDT",
+        "amount" : 1000
+      }
+    ]
   }

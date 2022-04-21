@@ -9,7 +9,7 @@ const initialState = {
         return {
           ...state,
           items: action.payload,
-          //isLoaded: true,
+          isLoaded: true,
         };
       
       default:
