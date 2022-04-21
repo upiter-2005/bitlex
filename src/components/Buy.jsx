@@ -1,26 +1,35 @@
 import React from "react";
 import { createRef } from "react";
 
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addInvestOrder} from "../redux/actions/order";
+
 import moment from "moment";
 
 function Buy({ usdt, activePair, makeOrder }) {
+  const dispatch = useDispatch();
+
   const refAmount = createRef();
 
   const handlerSubmitOrder = (event) => {
     event.preventDefault();
     const time = moment().format("DD-MM-YYYY hh:mm:ss");
 
-    const order = 
-      {
-        amount: refAmount.current.value,
-        pair: activePair.currency,
-        price: activePair.price,
-        type: "buy",
-        time: time,
-        result: refAmount.current.value * activePair.price,
-      }
-    ;
+    const order = {
+      amount: refAmount.current.value,
+      pair: activePair.currency,
+      price: activePair.price,
+      type: "buy",
+      time: time,
+      result: refAmount.current.value * activePair.price,
+    };
+    const orderInvest = {
+      amount: refAmount.current.value,
+      pair: activePair.currency,
+    };
     makeOrder(order);
+    dispatch(addInvestOrder(orderInvest));
   };
 
   return (

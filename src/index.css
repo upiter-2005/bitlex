@@ -24,3 +24,14 @@ code {
 .birga-marga{
   margin-top: 2px!important;
 }
+.invest__item{
+  display: flex;
+}
+.order__col__3{
+  width: 400px!important;
+  margin: 0 auto;
+  text-align: center;
+}
+.order__col__3 .order-wrap-item{
+  text-align: center;
+}

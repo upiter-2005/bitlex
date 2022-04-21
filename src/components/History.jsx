@@ -1,8 +1,13 @@
 import React from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { useSelector, useDispatch } from "react-redux";
+
 import '../css/transition.css';
 
 function History({ items }) {
+
+
+
   return (
     <section>
       <div className="container">

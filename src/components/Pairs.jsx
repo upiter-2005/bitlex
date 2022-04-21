@@ -28,7 +28,7 @@ const Pairs = React.memo(function Pairs({
               ))
             : Array(10)
                 .fill("")
-                .map((item) => <LoadingPair />)}
+                .map((item, index) => <LoadingPair key={index} />)}
         </tbody>
       </table>
     </div>

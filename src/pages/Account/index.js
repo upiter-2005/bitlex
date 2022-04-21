@@ -65,51 +65,50 @@ function Account() {
           <div className="order-wrap-item">
             <span>Сумма</span>
           </div>
-
-          {/* <div className="order-wrap-item">
-              <span>Всего</span>
-            </div> */}
-
-          {/* <div className="order-wrap-item">
-            <select>
-              <option value="volvo">Отменить все</option>
-              <option value="saab">Все</option>
-              <option value="opel">Лимит</option>
-              <option value="audi">Стоп-лимит</option>
-              <option value="audi">Limit-Marker</option>
-            </select>
-          </div> */}
-        </div>
-        <div>
-          <AccountData />
-          {items ? (
-            items.map((item, index) => (
-              <div className="order-wrap" key={index}>
-                <div className="order-wrap-item">
-                  <span>{item.time}</span>
-                </div>
-                <div className="order-wrap-item">
-                  <span>{item.pair}/USDT</span>
-                </div>
-                <div className="order-wrap-item">
-                  <span>{item.type}</span>
-                </div>
-                <div className="order-wrap-item">
-                  <span>{item.price}</span>
-                </div>
-                <div className="order-wrap-item">
-                  <span>{item.amount}</span>
-                </div>
-                <div className="order-wrap-item">
-                  <span>{item.result}</span>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div>No orders</div>
-          )}
         </div>
       </div>
+      <div>
+        {items ? (
+          items.map((item, index) => (
+            <div className="order-wrap" key={index}>
+              <div className="order-wrap-item">
+                <span>{item.time}</span>
+              </div>
+              <div className="order-wrap-item">
+                <span>{item.pair}/USDT</span>
+              </div>
+              <div className="order-wrap-item">
+                <span>{item.type}</span>
+              </div>
+              <div className="order-wrap-item">
+                <span>{item.price}</span>
+              </div>
+              <div className="order-wrap-item">
+                <span>{item.amount}</span>
+              </div>
+              <div className="order-wrap-item">
+                <span>{item.result}</span>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div>No orders</div>
+        )}
+      </div>
+
+      <div className="order-wrap order__col__3">
+        <div className="order-wrap-item">
+          <span>Кол-во</span>
+        </div>
+        <div className="order-wrap-item">
+          <span>Пара</span>
+        </div>
+        <div className="order-wrap-item">
+          <span>Сумма</span>
+        </div>
+      </div>
+
+      <AccountData />
     </section>
   );
 }
