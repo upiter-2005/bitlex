@@ -1,7 +1,7 @@
 const initialState = {
   orders: [],
   invest: [],
-  usdtAmount: 1000,
+  usdtAmount: 0,
 };
 
 const order = (state = initialState, action) => {
@@ -11,6 +11,13 @@ const order = (state = initialState, action) => {
       return {
         ...state,
         orders: newList,
+      };
+
+    case "SET_BALANCE":
+      let balance = action.payload.toFixed(2);
+      return {
+        ...state,
+        usdtAmount: balance,
       };
 
     case "ADD_INVEST":
@@ -25,7 +32,9 @@ const order = (state = initialState, action) => {
         investList = state.invest.map((item) => {
           console.log(item);
           if(item.pair === action.payload.pair){
-            return { pair: item.pair, amount: parseInt(item.amount) + parseInt(action.payload.amount) }
+            let result = parseFloat(item.amount) + parseFloat(action.payload.amount) 
+            result = result.toFixed(2);
+            return { pair: item.pair, amount: result}
           }else return item;
         });
       }

@@ -6,6 +6,7 @@ function AccountData() {
 
   return (
     <>
+    
       {investItems.map((item, index) => (
         <div className="order-wrap order__col__3" key={index}>
           <div className="order-wrap-item">
@@ -23,4 +24,4 @@ function AccountData() {
   );
 }
 
-export default AccountData;
+export default React.memo(AccountData);

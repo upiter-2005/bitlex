@@ -3,11 +3,11 @@ import { createRef } from "react";
 
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addInvestOrder} from "../redux/actions/order";
+import { addInvestOrder, setBalance } from "../redux/actions/order";
 
 import moment from "moment";
 
-function Buy({ usdt, activePair, makeOrder }) {
+function Buy({ balance, activePair, makeOrder }) {
   const dispatch = useDispatch();
 
   const refAmount = createRef();
@@ -28,8 +28,13 @@ function Buy({ usdt, activePair, makeOrder }) {
       amount: refAmount.current.value,
       pair: activePair.currency,
     };
-    makeOrder(order);
-    dispatch(addInvestOrder(orderInvest));
+    if (order.result < balance) {
+      makeOrder(order);
+      dispatch(addInvestOrder(orderInvest));
+      dispatch(setBalance(balance - order.result));
+    } else {
+      alert("no balance!");
+    }
   };
 
   return (
@@ -38,7 +43,7 @@ function Buy({ usdt, activePair, makeOrder }) {
         <p className="m-0 bye-btc">Купить {activePair.currency}</p>
         <span>
           <img src="img/wallet.svg" alt="" width="20px" />
-          <span className="sale-btc">{usdt} USDT</span>
+          <span className="sale-btc">{balance} USDT</span>
         </span>
       </div>
       <form onSubmit={handlerSubmitOrder}>
@@ -54,6 +59,7 @@ function Buy({ usdt, activePair, makeOrder }) {
             ref={refAmount}
             placeholder={activePair.currency}
             min="0"
+            step="0.001"
           />
         </p>
         <div className="d-flex justify-content-end f-container-a">
@@ -64,7 +70,12 @@ function Buy({ usdt, activePair, makeOrder }) {
         </div>
         <p>
           <label htmlFor="bb1">Всего:</label>
-          <input type="text" id="bb3" className="blcahin" placeholder={usdt} />
+          <input
+            type="text"
+            id="bb3"
+            className="blcahin"
+            placeholder={balance}
+          />
         </p>
         <button type="submit" className="enter">
           Купить <span>{activePair.currency}</span>

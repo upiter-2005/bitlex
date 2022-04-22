@@ -35,3 +35,9 @@ code {
 .order__col__3 .order-wrap-item{
   text-align: center;
 }
+.trade__account .order__col__3{
+  width: 100%!important;
+}
+.trade__account .order__col__3 .order-wrap-item{
+  width: 33%!important;
+}

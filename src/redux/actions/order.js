@@ -6,3 +6,7 @@ export const addInvestOrder = (items) => ({
   type: "ADD_INVEST",
   payload: items,
 });
+export const setBalance = (balance) => ({
+  type: "SET_BALANCE",
+  payload: balance,
+});

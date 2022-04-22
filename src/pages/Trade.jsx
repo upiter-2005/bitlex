@@ -1,10 +1,11 @@
 import React from "react";
 import { Buy, Current, History, Pairs, Sell, LoadingPair } from "../components";
+import { AccountData } from "./";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPairs } from "../redux/actions/currencies";
-import { addOrderItem } from "../redux/actions/order";
+import { addOrderItem, setBalance } from "../redux/actions/order";
 
 function Trade() {
   //const [pairs, setPairs] = useState([]);
@@ -16,15 +17,15 @@ function Trade() {
   const pairs = useSelector(({ currencies }) => currencies.items);
   const load = useSelector(({ currencies }) => currencies.isLoaded);
   const order = useSelector(({ order }) => order.orders);
+  const balance = useSelector(({order})=> order.usdtAmount);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchPairs());
     axios.get("http://localhost:3000/db.json").then(({ data }) => {
-      // setPairs(data.usdt);
       setDefaultPair(data.default);
-      setAccount(data.account[0].amount);
+      dispatch(setBalance(data.account[0].amount));
     });
   }, []);
 
@@ -54,7 +55,13 @@ function Trade() {
 
         <div className="container-my">
           <div className="row">
-            <div className="col-md-9">
+            <div className="col-md-2">
+              <div className="trade__account">
+                <h4>Account</h4>
+                <AccountData />
+              </div>
+            </div>
+            <div className="col-md-7">
               <div className="row">
                 <Current activePair={defaultPair} />
               </div>
@@ -73,7 +80,7 @@ function Trade() {
                             <div className="row">
                               <Buy
                                 activePair={defaultPair}
-                                usdt={account}
+                                balance={balance}
                                 makeOrder={addOrder}
                               />
                               <Sell
