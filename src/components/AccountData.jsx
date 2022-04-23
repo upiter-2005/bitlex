@@ -1,12 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
-function AccountData() {
-  const investItems = useSelector(({ order }) => order.invest);
+function AccountData({investItems}) {
 
   return (
     <>
-    
       {investItems.map((item, index) => (
         <div className="order-wrap order__col__3" key={index}>
           <div className="order-wrap-item">

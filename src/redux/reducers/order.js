@@ -14,7 +14,8 @@ const order = (state = initialState, action) => {
       };
 
     case "SET_BALANCE":
-      let balance = action.payload.toFixed(2);
+      let balance = parseFloat(action.payload).toFixed(2);
+      console.log(action.payload);
       return {
         ...state,
         usdtAmount: balance,
@@ -31,17 +32,34 @@ const order = (state = initialState, action) => {
       } else {
         investList = state.invest.map((item) => {
           console.log(item);
-          if(item.pair === action.payload.pair){
-            let result = parseFloat(item.amount) + parseFloat(action.payload.amount) 
+          if (item.pair === action.payload.pair) {
+            let result =
+              parseFloat(item.amount) + parseFloat(action.payload.amount);
             result = result.toFixed(2);
-            return { pair: item.pair, amount: result}
-          }else return item;
+            return { pair: item.pair, amount: result };
+          } else return item;
         });
       }
-
       return {
         ...state,
         invest: investList,
+      };
+
+    case "REMOVE_INVEST":
+      let removeData = [];
+      removeData = state.invest.map((item) => {
+        if (item.pair === action.payload.currentCoin) {
+          let result =
+            parseFloat(item.amount) - parseFloat(action.payload.amountCoin);
+          result = result.toFixed(2);
+          if (result < 0.0000001) {
+            return false;
+          }else{ return { pair: item.pair, amount: result };}
+        } else return item;
+      });
+      return {
+        ...state,
+        invest: removeData,
       };
 
     default:

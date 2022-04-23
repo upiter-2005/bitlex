@@ -1,13 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Modal } from "../../components";
-import AccountData from "./AccountData";
+import AccountData from "../../components/AccountData";
 import { useState } from "react";
+import { useSelect } from "react-redux";
 
 function Account() {
   const items = useSelector(({ order }) => order.orders);
   const [open, switchModal] = useState(false);
-
+  const invest = useSelector(({ order }) => order.invest);
   return (
     <section className="bitlex-wrap">
       <h2>Account</h2>
@@ -108,7 +109,7 @@ function Account() {
         </div>
       </div>
 
-      <AccountData />
+      <AccountData investItems={invest} />
     </section>
   );
 }

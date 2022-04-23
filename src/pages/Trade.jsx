@@ -18,6 +18,7 @@ function Trade() {
   const load = useSelector(({ currencies }) => currencies.isLoaded);
   const order = useSelector(({ order }) => order.orders);
   const balance = useSelector(({order})=> order.usdtAmount);
+  const invest = useSelector(({ order }) => order.invest);
 
   const dispatch = useDispatch();
 
@@ -58,7 +59,7 @@ function Trade() {
             <div className="col-md-2">
               <div className="trade__account">
                 <h4>Account</h4>
-                <AccountData />
+                <AccountData investItems={invest} />
               </div>
             </div>
             <div className="col-md-7">
@@ -85,8 +86,9 @@ function Trade() {
                               />
                               <Sell
                                 activePair={defaultPair}
-                                usdt={account}
+                                balance={balance}
                                 makeOrder={addOrder}
+                                investItems={invest}
                               />
                             </div>
                           </div>
