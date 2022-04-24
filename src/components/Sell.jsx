@@ -8,6 +8,13 @@ import moment from "moment";
 function Sell({ activePair, balance, makeOrder, investItems }) {
   const refAmount = createRef();
   const dispatch = useDispatch();
+  let investBalanceCoin;
+  investItems.map((item) => {
+    if (item.pair === activePair.currency) {
+      investBalanceCoin = item.amount;
+      return false;
+    }
+  });
 
   const handlerSubmitOrder = (event) => {
     event.preventDefault();
@@ -23,17 +30,22 @@ function Sell({ activePair, balance, makeOrder, investItems }) {
     };
 
     let isExist = investItems.some((item) => item.pair === activePair.currency);
+    
+    console.log(investBalanceCoin);
     if (isExist) {
       let currentCoin = activePair.currency;
       let amountCoin = order.amount;
-      let calcBalance = parseFloat(order.result) + parseFloat(balance);
-      
+      if (investBalanceCoin >= amountCoin) {
+        let calcBalance = parseFloat(order.result) + parseFloat(balance);
+
         dispatch(setBalance(calcBalance));
         dispatch(removeInvest({ currentCoin, amountCoin }));
         makeOrder(order);
-      
+      }else{
+        alert('У вас нет столько монет, введите меньшее количество')
+      }
     } else {
-      return false;
+      alert('Нет монеты на балансе');
     }
   };
 
@@ -43,7 +55,7 @@ function Sell({ activePair, balance, makeOrder, investItems }) {
         <p className="m-0 sel-btc">Продать {activePair.currency}</p>
         <span>
           <img src="img/wallet.svg" alt="" width="20px" />
-          <span className="sale-btc">- {activePair.currency}</span>{" "}
+          <span className="sale-btc">{investBalanceCoin} - {activePair.currency}</span>{" "}
         </span>
       </div>
       <form onSubmit={handlerSubmitOrder}>
@@ -62,6 +74,8 @@ function Sell({ activePair, balance, makeOrder, investItems }) {
             className="bb11"
             ref={refAmount}
             placeholder="0"
+            min="0"
+            step="0.0001"
           />
         </p>
         <div className="d-flex justify-content-end f-container-a">
